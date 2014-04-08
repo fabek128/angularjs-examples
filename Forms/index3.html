@@ -1,0 +1,38 @@
+<html ng-app="angularApp">
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+		<title>BMI Calculator</title>
+	</head>
+	<body>
+		<h1>BMI Calculator</h1>
+		<form ng-submit="calcBMI()" ng-controller="BMICalculatorController">
+			<b>Weight:</b> <input type="text" ng-model="arr.weight"> (pounds)<br/>
+			<b>Height:</b> <input type="text" ng-model="arr.heightFt"> (ft) <input type="text" ng-model="arr.heightIn"> (in)<br/>
+			<button>Calculate BMI</button>
+			<button ng-click="reset()">Reset</button>
+		</form>
+		<script>
+			var angularAppModule = angular.module('angularApp', []);
+
+			angularAppModule.controller('BMICalculatorController',
+					function($scope){
+						$scope.arr = { weight: 0, heightFt: 0, heightIn: 0 };
+
+						$scope.calcBMI = function(){
+							if($scope.arr.weight != 0 && $scope.arr.heightFt != 0){
+								var bmiValue = (parseInt($scope.arr.weight) * 703) / Math.pow((parseInt($scope.arr.heightFt) * 12) 
+												+ parseInt($scope.arr.heightIn), 2);
+								alert("BMI: " + bmiValue);
+							}
+						}
+
+						$scope.reset = function(){
+							$scope.arr.weight = 0;
+							$scope.arr.heightIn = 0;
+							$scope.arr.heightFt = 0;
+						}
+					}					
+				);
+		</script>
+	</body>
+</html>

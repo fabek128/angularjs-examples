@@ -1,0 +1,40 @@
+<html ng-app>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+		<title>Agenda</title>
+	</head>
+	<body ng-controller="AgendaController">
+		<h1>Agenda</h1>
+		<table>
+			<tr>
+				<td>FirstName</td>
+				<td>LastName</td>
+				<td>Phone</td>
+				<td>Action</td>
+			</tr>
+			<tr ng-repeat="item in items">
+				<td>{{item.firstname}}</td>
+				<td>{{item.lastname}}</td>
+				<td>{{item.phone}}</td>
+				<td><button ng-click="remove($index)">Remove</button></td>
+			</tr>
+		</table>
+		<script>
+			function AgendaController($scope){
+				$scope.items = [
+					{ firstname: "Juan", lastname: "Flores", phone: "443-21234" },
+					{ firstname: "Pedro", lastname: "Ramirez", phone: "551-01010" },
+					{ firstname: "Horacio", lastname: "Tevez", phone: "643-22312" },
+					{ firstname: "Esther", lastname: "Clom", phone: "231-11111" },
+					{ firstname: "Nelson", lastname: "Haha", phone: "111-43245" },
+					{ firstname: "Jack", lastname: "Fuentes", phone: "123-12123" },
+					{ firstname: "Monchito", lastname: "Merlo", phone: "112-3323" }
+				];
+
+				$scope.remove = function(index) {
+					$scope.items.splice(index, 1);
+				}
+			}
+		</script>
+	</body>
+</html>

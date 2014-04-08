@@ -1,0 +1,28 @@
+<html ng-app="angularApp">
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+		<title>x10</title>
+	</head>
+	<body>
+		<h1>x10</h1>
+		<form ng-controller="x10Controller">
+			<b>Number:</b> <input type="text" ng-change="x10calc()" ng-model="arr.number"><br/>
+			{{arr.result}} 
+		</form>
+		<script>
+			var angularAppModule = angular.module('angularApp', []);
+
+			angularAppModule.controller('x10Controller',
+					function($scope){
+						$scope.arr = { number: 0 };
+
+						x10calc = function(){
+							$scope.arr.result = $scope.arr.number * 10;
+						}
+
+						$scope.$watch("arr.number", x10calc);
+					}					
+				);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,53 @@
+<html ng-app>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+		<title>Agenda</title>
+		<style type="text/css">
+			.row-enable-true{
+				color: black;
+			}
+
+			.row-enable-false{
+				color: gray;
+			}			
+		</style>
+	</head>
+	<body ng-controller="AgendaController">
+		<h1>Agenda</h1>
+		<table>
+			<tr>
+				<td>FirstName</td>
+				<td>LastName</td>
+				<td>Phone</td>
+				<td>Actions</td>
+			</tr>
+			<tr ng-repeat="item in items">
+				<td class="row-enable-{{item.enable}}">{{item.firstname}}</td>
+				<td class="row-enable-{{item.enable}}">{{item.lastname}}</td>
+				<td class="row-enable-{{item.enable}}">{{item.phone}}</td>
+				<td><button ng-click="remove($index)">Remove</button> - <button ng-click="disable($index)">Disable</button></td>
+			</tr>
+		</table>
+		<script>
+			function AgendaController($scope){
+				$scope.items = [
+					{ firstname: "Juan", lastname: "Flores", phone: "443-21234", enable: true },
+					{ firstname: "Pedro", lastname: "Ramirez", phone: "551-01010", enable: true },
+					{ firstname: "Horacio", lastname: "Tevez", phone: "643-22312", enable: true },
+					{ firstname: "Esther", lastname: "Clom", phone: "231-11111", enable: true },
+					{ firstname: "Nelson", lastname: "Haha", phone: "111-43245", enable: true },
+					{ firstname: "Jack", lastname: "Fuentes", phone: "123-12123", enable: true },
+					{ firstname: "Monchito", lastname: "Merlo", phone: "112-3323", enable: true }
+				];
+
+				$scope.remove = function(index) {
+					$scope.items.splice(index, 1);
+				}
+
+				$scope.disable = function(index){
+					$scope.items[index].enable = false;
+				}
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,36 @@
+<html ng-app>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+		<title>Agenda</title>
+	</head>
+	<body>
+		<h1>Agenda</h1>
+
+		<ul ng-controller="AgendaController">
+			<li ng-repeat="item in items">
+				<a href="/person/view/{{item.id}}">{{ item.firstname }} {{ item.lastname }} - Phone: {{ item.phone }}</a>
+			</li>	
+		</ul>
+
+		<button ng-click="insert()">Insert</button>
+
+		<script>
+			function AgendaController($scope){
+				$scope.items = [
+					{ id: "1", firstname: "Juan", lastname: "Flores", phone: "443-21234" },
+					{ id: "2", firstname: "Pedro", lastname: "Ramirez", phone: "551-01010" },
+					{ id: "3", firstname: "Horacio", lastname: "Tevez", phone: "643-22312" },
+					{ id: "4", firstname: "Esther", lastname: "Clom", phone: "231-11111" },
+					{ id: "5", firstname: "Nelson", lastname: "Haha", phone: "111-43245" },
+					{ id: "6", firstname: "Jack", lastname: "Fuentes", phone: "123-12123" },
+					{ id: "7", firstname: "Monchito", lastname: "Merlo", phone: "112-3323" }
+				];
+
+				$scope.insert = function(){
+					$scope.items.splice(1,0,{ id: "8", firstname: "Test", lastname: "Test", phone: "992-7723" });
+				};
+
+			}
+		</script>
+	</body>
+</html>
