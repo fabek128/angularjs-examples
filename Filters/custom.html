@@ -1,0 +1,49 @@
+<html ng-app="angularApp">
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+		<title>Data with Custom Filters</title>
+	</head>
+	<body ng-controller="NgController">
+		<h1>Data with Custom Filters</h1>
+		<ul ng-repeat="item in items">
+			<li>
+				{{item.price | currency }} | {{item.count | number:0 }} | {{item.count * item.price | addPercentage:5 }}
+			</li>
+		</ul>
+		<script>
+			var angularAppModule = angular.module('angularApp', []);
+
+			angularAppModule.filter("addPercentage", function(){
+				return function(input, percent){
+					var percentSubTotal = (input * percent) / 100;
+					return input + percentSubTotal;
+				};
+			});
+
+			angularAppModule.factory("Items", function(){
+				var items = {};
+
+				items.getAll = function(){
+					return [
+						{ price: 23.1, count: 2.1 },
+						{ price: 43.2, count: 22.1 },
+						{ price: 82.63, count: 54.2 },
+						{ price: 62, count: 65.1 },
+						{ price: 18, count: 32.53 },
+						{ price: 12.2, count: 62.11 },
+						{ price: 19.43, count: 52.15 },
+						{ price: 26.23, count: 24.12 }
+					];
+				};
+
+				return items;
+			});
+
+			angularAppModule.controller('NgController',
+					function($scope, Items){
+						$scope.items = Items.getAll();
+					}					
+				);
+		</script>
+	</body>
+</html>
